@@ -1,0 +1,45 @@
+.social_icons_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social_icons {
+  background-color: red;
+  height: 2.25rem;
+  width: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+.twitter {
+  background-color: #1da1f2;
+}
+
+.facebook {
+  background-color: #3b5999;
+}
+
+.dribbles {
+  background-color: #ea4c89;
+}
+
+.github {
+  background-color: #222222;
+}
+
+.footer_title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #00cdac;
+}
+
+.footer_subtext {
+  font-size: 1.2rem;
+  padding: 1.5rem 0;
+  color: #32325d;
+}

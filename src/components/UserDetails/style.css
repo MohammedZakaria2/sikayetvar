@@ -1,0 +1,84 @@
+.user_details_left {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.user_details_left .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.user_name {
+  font-family: Open Sans;
+  font-size: 1.75rem;
+  line-height: 38px;
+  font-weight: 400;
+  color: #32325d;
+}
+
+.user_city {
+  font-weight: 300;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  color: #32325d;
+}
+.details_item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.details_item p {
+  margin: 0.5rem 0;
+}
+
+.details_item_label {
+  min-width: 7rem;
+  font-size: 0.875rem;
+  color: #adb5bd;
+}
+
+.details_item_value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #525f7f;
+}
+
+a.details_item_value {
+  color: #4a90e2;
+}
+
+.descriptions {
+  text-align: center;
+}
+
+.custom_spaces {
+  border-top: 0.0625rem solid #e9ecef;
+  margin-top: 3.75rem;
+  padding: 3.75rem 0 1.25rem 0;
+}
+
+.show_more_button_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.show_more_button_wrapper button {
+  background-color: transparent;
+  color: #4a90e2;
+  border: none;
+}
+
+.descriptions p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: #525f7f;
+}

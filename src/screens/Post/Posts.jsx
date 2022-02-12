@@ -1,53 +1,76 @@
 import React, { useEffect, useState } from 'react';
+import SweetAlert from 'react-bootstrap-sweetalert/dist/components/SweetAlert';
 import ContentContainer from '../../components/ContentContainer';
 import List from '../../components/List';
 import ShowCase from '../../components/ShowCase';
 import { useQuery } from 'react-query';
 import { fetcher } from '../../helpers';
+import api from './../../helpers/api';
 import './style.css';
-import SweetAlert from 'react-bootstrap-sweetalert/dist/components/SweetAlert';
-import axios from 'axios';
+import Pagination from '../../components/Pagination';
 
 const Posts = () => {
-  const [pages, setPages] = useState([0]);
+  const [latestPost, setLatestPost] = useState(null);
+  const [page, setPage] = useState(1);
   const [list, setList] = useState(null);
   const [tempId, setTempId] = useState(null);
   const [sweetAlert, setSweetAlert] = useState(false);
 
   const { isLoading, error, data } = useQuery(
-    ['repoData', `/posts?_start=${pages[pages.length - 1]}&_limit=6`],
-    () => fetcher(`/posts?_start=${pages[pages.length - 1]}&_limit=6`)
+    ['repoData', `/posts?_page=${page}&_limit=6`],
+    () => fetcher(`/posts?_page=${page}&_limit=6`)
   );
 
   useEffect(() => {
+    // update list on data change
     setList(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  useEffect(() => {
+    // git the latest post id for last page in pagination button
+    getLatestPos();
+  }, []);
+
+  const getLatestPos = async () => {
+    try {
+      // git the latest post id for last page in pagination button
+      const { data } = await api.get('/posts?_sort=id&_order=desc&_limit=1');
+      setLatestPost(data[0].id);
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
+
   const next = () => {
-    setPages([...pages, data[data.length - 1].id]);
+    setPage(page + 1);
     setList(data);
   };
 
   const prev = () => {
-    const newPages = [...pages];
-    newPages.pop();
-    setPages(newPages);
+    setPage(page - 1);
     setList(data);
   };
 
   const deletePost = (id) => {
+    // show alert and set the post id for delete
     setSweetAlert(true);
     setTempId(id);
   };
 
   const onConfirm = async () => {
-    await axios.delete(`https://jsonplaceholder.typicode.com/posts/${tempId}`);
-
-    setSweetAlert(false);
-    setTempId(null);
-    const newArr = list.filter((item) => item.id !== tempId);
-    setList(newArr);
+    try {
+      // delete post
+      await api.delete(`/posts/${tempId}`);
+      setSweetAlert(false);
+      setTempId(null);
+      // update list
+      const newArr = list.filter((item) => item.id !== tempId);
+      setList(newArr);
+      getLatestPos();
+    } catch (error) {
+      console.log('error:', error);
+    }
   };
 
   const onCancel = () => {
@@ -55,22 +78,17 @@ const Posts = () => {
     setSweetAlert(false);
   };
 
-  const handelEdit = (newValues) => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${newValues.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(newValues),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        const indexOfItem = list.findIndex((post) => post.id === newValues.id);
-        const arr = [...list];
-        arr[indexOfItem] = newValues;
-        setList(arr);
-      });
+  const handelEdit = async (newValues) => {
+    try {
+      // update post
+      const { data } = await api.patch(`/posts/${newValues.id}`, newValues);
+      const indexOfItem = list.findIndex((post) => post.id === newValues.id);
+      const arr = [...list];
+      arr[indexOfItem] = data;
+      setList(arr);
+    } catch (error) {
+      console.log('error:', error);
+    }
   };
 
   return (
@@ -88,22 +106,14 @@ const Posts = () => {
               items={list}
             />
           )}
-          <div className="pagination_buttons">
-            <button
-              className="pagination_button"
-              disabled={pages.length > 1 ? false : true}
-              onClick={prev}
-            >
-              {'< Prev'}
-            </button>
-            <button
-              className="pagination_button"
-              disabled={pages[pages.length - 1] === 96}
-              onClick={next}
-            >
-              {'Next >'}
-            </button>
-          </div>
+          <Pagination
+            isLoading={isLoading}
+            page={page}
+            prev={prev}
+            next={next}
+            list={list}
+            latestPost={latestPost}
+          />
         </div>
       </ContentContainer>
       {sweetAlert && (
@@ -125,43 +135,3 @@ const Posts = () => {
 };
 
 export default Posts;
-
-// import React, { useEffect, useState } from 'react';
-// import ContentContainer from '../../components/ContentContainer';
-// import List from '../../components/List';
-// import ShowCase from '../../components/ShowCase';
-// import { useQuery } from 'react-query';
-// import { fetcher } from '../../helpers';
-
-// const Posts = () => {
-//   const [pages, setPages] = useState([0]);
-//   console.log('pages:', pages);
-//   const { isLoading, error, data, isFetching } = useQuery(
-//     ['posts', `/posts?_start=${pages[pages.length - 1]}&_limit=6`],
-//     fetcher
-//   );
-
-//   console.log('data:', data);
-//   const next = () => {
-//     setPages([...pages, data[data.length - 1].id]);
-//   };
-
-//   const prev = () => {
-//     const newPages = [...pages];
-//     newPages.pop();
-//     setPages(newPages);
-//   };
-
-//   return (
-//     <div className="page posts">
-//       <ShowCase />
-//       <ContentContainer>
-//         <List />
-//         <button onClick={prev}>prev</button>
-//         <button onClick={next}>next</button>
-//       </ContentContainer>
-//     </div>
-//   );
-// };
-
-// export default Posts;

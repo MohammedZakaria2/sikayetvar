@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import api from './../../../helpers/api';
 import './style.css';
-// import axios from 'axios';
 
 const Item = ({ item, handelDelete, handelEdit }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,10 +10,8 @@ const Item = ({ item, handelDelete, handelEdit }) => {
   const [form, setForm] = useState({ title: '', body: '' });
 
   const fetchItem = async () => {
-    // const { data } = await axios.get(
-    //   `https://jsonplaceholder.typicode.com/posts/${item.id}`
-    // );
-    setForm({ title: item.title, body: item.body });
+    const { data } = await api.get(`/posts/${item.id}`);
+    setForm({ title: data.title, body: data.body });
     setIsOpen(true);
   };
 

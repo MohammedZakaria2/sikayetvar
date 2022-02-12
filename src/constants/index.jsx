@@ -19,4 +19,4 @@ export const ICONS = [
   },
 ];
 
-export const BASE_UEL = 'https://jsonplaceholder.typicode.com';
+export const BASE_URL = 'https://api-app-0001.herokuapp.com';

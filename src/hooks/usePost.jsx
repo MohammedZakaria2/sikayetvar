@@ -8,8 +8,8 @@ const usePost = (id) => {
   );
 
   const { data: user } = useQuery(
-    ['user', `/users/${post?.userId}`],
-    () => fetcher(`/users/${post?.userId}`),
+    ['user', `/profile/${post?.userId}`],
+    () => fetcher(`/profile/${post?.userId}`),
     {
       enabled: post ? true : false,
     }

@@ -2,8 +2,8 @@ import { useQuery } from 'react-query';
 import { fetcher } from '../helpers';
 
 const useUser = (id) => {
-  const { isLoading, data: user } = useQuery(['user', `/users/${id}`], () =>
-    fetcher(`/users/${id}`)
+  const { isLoading, data: user } = useQuery(['user', `/profile/${id}`], () =>
+    fetcher(`/profile/${id}`)
   );
 
   const { data: photo } = useQuery(

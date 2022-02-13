@@ -18,10 +18,11 @@ const Nav = () => {
                     <Link className="link" to={'/'}>
                       Posts
                     </Link>
+                    <button className="call_to_action on_mobile">Login</button>
                   </div>
                 </Col>
                 <Col md="auto">
-                  <button className="call_to_action">Login</button>
+                  <button className="call_to_action on_desktop">Login</button>
                 </Col>
               </Row>
             </div>

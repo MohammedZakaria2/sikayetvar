@@ -19,7 +19,8 @@ const Item = ({ item, handelDelete, handelEdit }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handelEditItem = () => {
+  const handelEditItem = (e) => {
+    e.preventDefault();
     setError(null);
     if (form.title && form.body) {
       handelEdit({ id: item.id, title: form.title, body: form.body });
@@ -61,41 +62,43 @@ const Item = ({ item, handelDelete, handelEdit }) => {
         </Modal.Header>
         <Modal.Body>
           <small className="fom_error">{error && error}</small>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="form_label">Title</Form.Label>
-              <Form.Control
-                className="input_style"
-                type="text"
-                placeholder="title ..."
-                name="title"
-                onChange={(e) => handelChange(e)}
-                value={form.title}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3 input_style"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label className="form_label">Body</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                name="body"
-                onChange={(e) => handelChange(e)}
-                value={form.body}
-              />
-            </Form.Group>
+          <Form onSubmit={(e) => handelEditItem(e)}>
+            <div className="post_form_inputs">
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label className="form_label">Title</Form.Label>
+                <Form.Control
+                  className="input_style"
+                  type="text"
+                  placeholder="Post title"
+                  name="title"
+                  onChange={(e) => handelChange(e)}
+                  value={form.title}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 input_style"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label className="form_label">Body</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  name="body"
+                  onChange={(e) => handelChange(e)}
+                  value={form.body}
+                />
+              </Form.Group>
+            </div>
+            <button type="submit" className="handel_edit_button edit">
+              GÜNCELLE
+            </button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <button
-            className="handel_edit_button edit"
-            onClick={() => handelEditItem()}
-          >
-            GÜNCELLE
-          </button>
-        </Modal.Footer>
+        {/* <Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </div>
   );

@@ -14,3 +14,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: add authentication functionality
+// TODO: use styled components for styling

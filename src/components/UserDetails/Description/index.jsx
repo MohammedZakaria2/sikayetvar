@@ -61,7 +61,9 @@ const Description = () => {
         </div>
       </Collapse>
       <div className="show_more_button_wrapper">
-        <button onClick={() => setIsOpen(!isOpen)}>Show more</button>
+        <button onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? 'Show less' : 'Show more'}
+        </button>
       </div>
     </div>
   );

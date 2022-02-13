@@ -56,6 +56,11 @@ a.details_item_value {
   text-align: center;
 }
 
+#user_text p {
+  text-align: justify;
+  line-height: 42px;
+}
+
 .custom_spaces {
   border-top: 0.0625rem solid #e9ecef;
   margin-top: 3.75rem;

@@ -41,3 +41,19 @@
   font-size: 0.85rem;
   color: #5e72e4;
 }
+
+.on_desktop {
+  display: none;
+}
+.on_mobile {
+  display: block;
+}
+
+@media screen and (min-width: 770px) {
+  .on_desktop {
+    display: block;
+  }
+  .on_mobile {
+    display: none;
+  }
+}

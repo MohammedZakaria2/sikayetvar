@@ -8,7 +8,7 @@ const BottomFooter = () => {
       <Col>
         <div className="inner_footer">
           <small className="copy_rights">
-            © 2018 <span className="colored"> Şikayetvar. </span>
+            © 2018 <span className="colored"> Şikayetvar </span>
           </small>
           <Link className="footer_link" to={'/'}>
             Posts

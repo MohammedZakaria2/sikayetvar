@@ -40,6 +40,16 @@
   }
 }
 
+.modal-body {
+  padding: 0;
+}
+.post_form_inputs {
+  border-bottom: 1px solid #e9ecef;
+  padding: 2rem 0 0.5rem 0;
+}
+.post_form_inputs > * {
+  padding: 0 1.5rem;
+}
 .handel_edit_button,
 .control_buttons a,
 .control_buttons button {
@@ -55,6 +65,7 @@
 }
 
 .edit {
+  margin: 1.5rem;
   background-color: #11cdef;
 }
 .primary_button {
@@ -74,8 +85,11 @@
   color: #525f7f;
 }
 
+.input_style textarea,
 .input_style {
   font-size: 0.875rem;
+  line-height: 1.1875rem;
+
   color: #8898aa;
 }
 

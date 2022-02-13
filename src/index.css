@@ -33,3 +33,8 @@ a {
 .message {
   color: #898888;
 }
+
+a,
+button {
+  outline: none;
+}

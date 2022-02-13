@@ -1,0 +1,28 @@
+.not_found {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+}
+
+.not_found__content {
+  padding: 2rem 1rem;
+  background-color: #f2f2f2;
+  border-radius: 0.4rem;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  width: 100%;
+}
+.error_number {
+  text-align: center;
+  color: #f2f2f2;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.error_message {
+  font-size: 1rem;
+  color: rgb(78, 78, 78);
+}
+.no_found_image {
+  width: 50%;
+}
